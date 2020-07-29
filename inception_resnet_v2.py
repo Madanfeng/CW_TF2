@@ -5,7 +5,6 @@ from __future__ import print_function
 import os
 import os.path
 import random
-import scipy.misc
 
 import cv2
 import numpy as np
@@ -16,16 +15,9 @@ from config import cfg
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
-# # BATCH_SIZE   = 1
 IMAGE_SIZE   = 320
 NUM_CHANNELS = 3
 NUM_LABELS   = 20
-#
-DATA_PATH = './data/imgs/'
-# # MODEL_PATH = './model/model.stage4.04-0.9697.v2_320_tf2.hdf5'
-# MODEL_PATH = './model/model.stage2.05-0.8851.v2_320_tf2.hdf5'
-#
-# CLASS_NAME = []
 
 
 class InceptionResnetV2:
@@ -45,30 +37,6 @@ class InceptionResnetV2:
     def predict_softmax(self, imgs):
         # imgs.shape = [batch_size, image_size, image_size, num_channels]
         return self.model(imgs)
-
-
-def readimg(ff):
-    # ff : LabelID_ImgName.jpg
-    # return [img, labelID]
-    f = DATA_PATH + ff
-    img = np.array(scipy.misc.imresize(scipy.misc.imread(f), (IMAGE_SIZE, IMAGE_SIZE)), dtype=np.float32) / 255 - .5
-    if img.shape != (IMAGE_SIZE, IMAGE_SIZE, NUM_CHANNELS):
-        return None
-    return [img, int(ff.split("_")[0])]
-
-
-class MyData:
-    # demo
-    def __init__(self):
-        from multiprocessing import Pool
-        pool = Pool(8)
-        r = pool.map(readimg, os.listdir(DATA_PATH))
-        r = [x for x in r if x != None]
-        test_data, test_labels = zip(*r)
-        self.test_data = np.array(test_data)
-        # one-hot
-        self.test_labels = np.zeros((len(test_labels), NUM_LABELS))
-        self.test_labels[np.arange(len(test_labels)), test_labels] = 1
 
 
 class Dataset:
@@ -157,20 +125,6 @@ class Dataset:
 
 
 def main():
-    # # read and precess image
-    # image_path = './output/adv3+14.png'
-    # # image_path = './imgs/665bc90eb487cb0760d40854b6dfe9cd.jpg'
-    # # image = scipy.misc.imresize(scipy.misc.imread(image_path), (IMAGE_SIZE, IMAGE_SIZE))
-    # image = cv2.imread(image_path)
-    # image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    # image = image[np.newaxis, :] / 255. - 0.5
-    #
-    # # road InceptionResnetV2 model
-    # model = InceptionResnetV2()
-    # pred = model.predict_softmax(image)
-    # pred_id = np.argmax(pred)
-    # print("The " + image_path.split('/')[-1] + " is classified as: ", pred_id, pred.numpy())
-
     # road InceptionResnetV2 model
     model = InceptionResnetV2(model_path=cfg.MODEL_PATH)
 

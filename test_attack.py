@@ -12,39 +12,7 @@ from config import cfg
 # NUM_LABELS = 20
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
-
-
-# def generate_data(data, samples, targeted=True, start=0):
-#     """
-#     Generate the input data to the attack algorithm.
-#
-#     data: the images to attack
-#     samples: number of samples to use
-#     targeted: if true, construct targeted attacks, otherwise untargeted attacks
-#     start: offset into data to use
-#     inception: if targeted and inception, randomly sample 100 targets intead of 1000
-#     """
-#     inputs = []
-#     targets = []
-#     for i in range(samples):
-#         if targeted:
-#             # seq = random.sample(range(0, NUM_LABELS-1), 5)
-#             seq = [14]  # not sexy label maybe
-#
-#             for j in seq:
-#                 if j == np.argmax(data.test_labels[start + i]):
-#                     continue
-#                 inputs.append(data.test_data[start + i])
-#                 targets.append(np.eye(data.test_labels.shape[1])[j])
-#         else:
-#             inputs.append(data.test_data[start + i])
-#             targets.append(data.test_labels[start + i])
-#
-#     inputs = np.array(inputs)
-#     targets = np.array(targets)
-#
-#     return inputs, targets
-
+ 
 
 if __name__ == "__main__":
     # road dataset and model

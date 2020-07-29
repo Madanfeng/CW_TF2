@@ -1,9 +1,9 @@
 from easydict import EasyDict as edict
 
-CLASS_NAME = ['notkonw1', 'notkonw2', 'baby_naked', 'child_naked', 'exposed',
-              'feet', 'intimate_nannan', 'intimate_nannv', 'intimate_nvnv', 'leggy',
-              'man_half_bareness', 'midriff', 'mild_cleavage', 'naked', 'normal',
-              'porn', 'sex', 'sex_toy', 'sexy', 'sm']
+CLASS_NAME = ['notkonw1', 'notkonw2', 'das', 'agka', 'erg',
+              'feet', 'in', 'tev', 'inv', 'gy',
+              'maa', 'mif', 'mage', 'ked', 'nmal',
+              'pog', 'sgfx', 'sedy', 'sy', 'dsm']
 
 __C                           = edict()
 # Consumers can get config by: from config import cfg
